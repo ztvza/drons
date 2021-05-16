@@ -1,0 +1,54 @@
+extends layout/base.pug
+
+block content
+	section.pt-5.mb-5
+		.container
+			nav.mb-4(aria-label='breadcrumb')
+				ol.breadcrumb.bg-light
+					li.breadcrumb-item
+						a(href='/') Главная
+					li.breadcrumb-item
+						a(href='#') Гоночные дроны
+					li.breadcrumb-item.active(aria-current='page') Ультрадрон
+			
+			.row
+				.col-md-7
+					img(src="https://media.discordapp.net/attachments/756099827649085482/836968959407947776/detail-3-gray.jpeg?width=1089&height=1089" style="max-width: 100%")
+				.col-md-5
+					h3.mb-3 Дрон LP-4567
+
+					.mb-4.justify-content-between
+						h4.text-success
+							| 6500₽ 
+							del.small.text-mutted.text-secondary 12999₽
+					
+					p.text-secondary Этот дрон — стандарт, на который стараются равняться все остальные компании. Его используют профессиональные гонщики по всему миру.
+
+					form
+						b
+							| Размер 
+							small.text-secondary (обязательное поле)
+
+						div.mb-3.mt-2
+							select.form-select.form-select-lg(aria-label='Default select example')
+								option(selected='1') Выберите размер
+								option(value='1') 15x15см
+								option(value='2') 25x25см
+
+						b
+							| Акксессуары
+
+						.mb-4
+							.form-check
+								input#extraAccumulator.form-check-input(type='checkbox' value='')
+								label.form-check-label(for='extraAccumulator')
+								| Аккамуляторы
+							.form-check
+								input#extaraBlades.form-check-input(type='checkbox' value='' checked='')
+								label.form-check-label(for='extaraBlades')
+								| Лопости
+
+
+					button.btn.btn-success.w-100.mb-2(type="button") Добавить в корзину
+					button.btn.btn-link.btn-sm.w-100(type="button") Добавить в избранное
+

@@ -1,0 +1,51 @@
+footer.footer.bg-secondary.pt-4.text-light
+	.container
+		.row.w-100.mb-5
+			.col-md-4
+				h5 Будем на связи
+				p Специально для вас мы собрали классную рассылку, которая будет приходить раз в месяц
+				form(action="/api/subscribeEmail" method="get")
+					input.form-control.w-100(
+						type="email"
+						required
+						placeholder="zahar@yandex.ru"
+						name="email")
+			.row.col-md-8
+				.col-md-3
+				.col-md-3
+					h5 Дроны
+					ul.list-unstyled.text-small
+						li.mb-1
+							a.text-light(href="#") Сверхзвуковые
+						li.mb-1
+							a.text-light(href="#") Для съёмки
+						li.mb-1
+							a.text-light(href="#") Спортивные
+
+				.col-md-3
+					h5 Магазин
+					ul.list-unstyled.text-small
+						li.mb-1
+							a.text-light(href="#") О компании
+						li.mb-1
+							a.text-light(href="#") Адреса
+						li.mb-1
+							a.text-light(href="#") Контакты
+
+				.col-md-3
+					h5 Бренды
+					ul.list-unstyled.text-small
+						li.mb-1
+							a.text-light(href="#") SuperDrive
+						li.mb-1
+							a.text-light(href="#") Sharp
+						li.mb-1
+							a.text-light(href="#") Droooooone
+						li.mb-1
+							a.text-light(href="#") Z-xc
+
+		.row.justify-content-between.pt-2.pb-2
+			.col
+				small © 2017–2021
+			.col.text-end
+				small Пользовательское соглашение | Политика использования Cookies

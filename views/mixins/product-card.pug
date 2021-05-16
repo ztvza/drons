@@ -1,0 +1,8 @@
+mixin product-card(product)
+	.col-md-3
+		.card
+			img.card-img-top(src= product.image)
+			.card-body
+				h5.card-title= product.name
+				p.card-text= `Цена: ${product.price}р`
+				a.btn.btn-primary(href="#") Подробнее
