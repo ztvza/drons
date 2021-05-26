@@ -1,0 +1,9 @@
+extends layout/base.pug
+
+block content
+	section.pt-4
+		.container
+			h1.mb-5= brandName
+			.row
+				each product in products
+					+product-card(product)

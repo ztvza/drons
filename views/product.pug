@@ -8,54 +8,56 @@ block content
 					li.breadcrumb-item
 						a(href='/') Главная
 					li.breadcrumb-item
-						a(href='#') Гоночные дроны
-					li.breadcrumb-item.active(aria-current='page') Ультрадрон
+						a(href=`/${product.brand}`)= product.brand
+					li.breadcrumb-item.active(aria-current='page')= product.name
 			
 			.row
 				.col-md-7
 					img(src="https://media.discordapp.net/attachments/756099827649085482/836968959407947776/detail-3-gray.jpeg?width=1089&height=1089" style="max-width: 100%")
 				.col-md-5
-					h3.mb-3#productName Дрон LP-4567
+					h3.mb-3#productName= product.name
 
 					.mb-4.justify-content-between
-						h4.text-success
-							span#productPrice 6500₽ 
-							del.small.text-mutted.text-secondary 12999₽
-					
-					p.text-secondary Этот дрон — стандарт, на который стараются равняться все остальные компании. Его используют профессиональные гонщики по всему миру.
+						h4.text-success 
+								span#productPrice #{product.price - product.discount}₽
 
-					form
-						b
-							| Размер 
-							small.text-secondary (обязательное поле)
+								if product.discount != 0 
+									del.small.text-mutted.text-secondary.ml-2 #{product.price}₽ 
 
-						div.mb-3.mt-2
-							select.form-select.form-select-lg#productSize(aria-label='Default select example')
-								option(selected='1') Выберите размер
-								option(value='15') 15x15см
-								option(value='25') 25x25см
+					p.text-secondary= product.desc 
 
-						b
-							| Акксессуары
+					b
+						| Размер 
+						small.text-secondary (обязательное поле)
 
-						.mb-4
-							.form-check
-								input#extraAccumulator.form-check-input(type='checkbox')
-								label.form-check-label(for='extraAccumulator')
-									| Аккамуляторы (+1000)
-							.form-check
-								input#extaraBlades.form-check-input(type='checkbox')
-								label.form-check-label(for='extaraBlades')
-									| Лопости (+500)
+					.mb-2
+						select.form-select.form-select-lg#productSize(aria-label='Default select example')
+							option(selected='1') Выберите размер
+							option(value='15') 15x15см
+							option(value='25') 25x25см
+
+					b
+						| Акксессуары
+
+					.mb-4
+						.form-check
+							input#extraAccumulator.form-check-input(type='checkbox')
+							label.form-check-label(for='extraAccumulator')
+								| Дополнительный аккумулятор (+ #{product.extraAccumulatorPrice}₽)
+
+						.form-check
+							input#extraBlades.form-check-input(type='checkbox')
+							label.form-check-label(for='extraBlades')
+								| Дополнительные лопасти (+#{product.extraBladesPrice}₽)
 
 
 					button.btn.btn-success.w-100.mb-2#addToCartButton(
-					type="button"
-					onclick= "addToCart()"
-					) 
+						type="button"
+						onclick="addToCart()"
+					)
 						| Добавить в корзину
-					button.btn.btn-link.btn-sm.w-100(type="button")
-						| Добавить в избранное
+					button.btn.btn-link.btn-sm.w-100(type="button") Добавить в избранное
 
-block customPageScripts 
-	script(type="text/javascript" src="js/productPage.js")
+block customPageScripts
+	script(type="text/javascript" src="/js/productPage.js")
+

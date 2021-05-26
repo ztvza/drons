@@ -12,7 +12,7 @@ const tgChat = '-500064724';
 
 // получаем базовое серверное приложение
 const app = express();
-telegramBot.launch();
+// telegramBot.launch();
 
 // приложение установить движок отображения pug
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 })); 
 
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + 'public'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/node_modules/jquery/dist'));
 app.use(express.static(__dirname + '/node_modules/axios/dist'));
@@ -49,13 +49,49 @@ app.get('/product', (req, res) => {
 		)
 })
 
-app.get('/about', (req, res) => {
-	res.render(
-			'about',
+app.get('/:brand', (req, res) => {
+	const brandProducts = products
+		.filter(product => product.brand.toLowerCase() === req.params.brand.toLowerCase());
+
+	if (brandProducts.length) {
+		res.render(
+			'brand',
 			{
-				pageTitle: 'About'
+				pageTitle: `Дроны от бренда ${req.params.brand}`,
+				brandName: req.params.brand,
+				products: brandProducts
 			}
 		)
+	} else {
+		console.log('Тут Фиаско! Такого бренда не существует');
+		res.redirect('/');
+	}
+})
+
+app.get('/:brand/:id', (req, res) => {
+	const brandProducts = products
+		.filter(product => product.brand.toLowerCase() === req.params.brand.toLowerCase());
+
+	if (brandProducts.length) {
+		const pageItem = brandProducts.find(product => product.id == req.params.id);
+
+		if (pageItem) {
+			res.render(
+				'product',
+				{
+					pageTitle: `Купить дрон ${pageItem.name}`,
+					brandName: req.params.brand,
+					product: pageItem
+				}
+			)
+		} else {
+			console.log('Тут фиаско, но бренд есть — посмотри еще у них');
+			res.redirect(`/${req.params.brand}`);
+		}
+	} else {
+		console.log('Тут Фиаско! Такого бренда не существует');
+		res.redirect('/');
+	}
 })
 
 app.get('/api/newRequest', (req, res) => {
